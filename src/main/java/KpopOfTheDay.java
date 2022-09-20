@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class KpopOfTheDay {
@@ -36,7 +37,7 @@ public class KpopOfTheDay {
         frame.setVisible(true);
     }
 
-    private JPanel initMainPanel() {
+    private JPanel initMainPanel() throws FileNotFoundException {
         JPanel mainPanel = new JPanel();
         mainPanel.setOpaque(false);
 
@@ -59,7 +60,7 @@ public class KpopOfTheDay {
     }
 
     public JLabel setBackgroundImage() throws IOException {
-        BufferedImage image = ImageIO.read(new File("src/main/resources/background.jpg"));
+        BufferedImage image = ImageIO.read(new File("src/main/resources/background.jpeg"));
         JLabel background = new JLabel(new ImageIcon(image));
         background.setAlignmentX(0.5f);
         background.setAlignmentY(0.5f);
