@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayList {
@@ -40,10 +41,16 @@ public class PlayList {
 
     @Override
     public String toString() {
-        return id + "," + theme + "," + curator + "," + musics.toString() + "," + tag.tagName();
+        return id + "," + theme + "," + curator + "," + musicsToString() + "," + tag.tagName();
     }
 
-    public String[] values() {
-        return new String[]{String.valueOf(id), theme, curator, musics.toString(), tag.tagName()};
+    public String musicsToString() {
+        List<String> temp = new ArrayList<>();
+
+        for (int i = 0; i < musics.size(); i += 1) {
+            temp.add(musics.get(i).toString());
+        }
+
+        return String.join("/", temp);
     }
 }

@@ -4,6 +4,8 @@ import models.Tag;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,5 +51,13 @@ public class PlayListService {
         }
 
         return musics;
+    }
+
+    public void savePlayList(PlayList playList) throws IOException {
+        FileWriter fileWriter = new FileWriter("playlists.txt", true);
+
+        fileWriter.write(playList.toString() + "\n");
+
+        fileWriter.close();
     }
 }

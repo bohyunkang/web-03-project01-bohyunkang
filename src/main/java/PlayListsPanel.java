@@ -17,7 +17,23 @@ public class PlayListsPanel extends JPanel {
 
     public PlayListsPanel() throws FileNotFoundException {
         this.setOpaque(false);
+        this.add(initAddButton());
         this.add(initPlayListsPanel());
+    }
+
+    public JButton initAddButton() {
+        JButton button = new JButton("플레이리스트 등록");
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setOpaque(true);
+        button.setBackground(new Color(238, 238, 238, 150));
+        button.setFont(new Font("AppleSDGothicNeoR00", Font.PLAIN, 12));
+        button.addActionListener(event -> {
+            UploadFrame frame = new UploadFrame();
+            frame.setVisible(true);
+        });
+        return button;
     }
 
     public JPanel initPlayListsPanel() {
