@@ -26,31 +26,40 @@ public class PlayListsPanel extends JPanel {
         playListsPanel.setOpaque(false);
 
         for (PlayList playList : playLists) {
-            JPanel playListPanel = new JPanel();
-            playListPanel.setOpaque(true);
-            playListPanel.setBackground(new Color(255, 255, 255, 150));
-            playListsPanel.add(playListPanel);
+            JPanel panel = new JPanel();
+            panel.setOpaque(true);
+            panel.setBackground(new Color(255, 255, 255, 150));
+            playListsPanel.add(panel);
 
             JLabel image = new JLabel("");
             image.setIcon(new ImageIcon("src/main/resources/playListIcon.png"));
-            playListPanel.add(image);
+            panel.add(image);
 
             JLabel playListTheme = new JLabel(playList.getTheme());
             playListTheme.setFont(new Font("AppleSDGothicNeoR00", Font.PLAIN, 16));
-            playListPanel.add(playListTheme);
+            panel.add(playListTheme);
 
             JButton button = new JButton("보러 가기");
             button.setBorderPainted(false);
             button.setContentAreaFilled(false);
             button.setFocusPainted(false);
-            button.setOpaque(false);
+            button.setOpaque(true);
+            button.setBackground(new Color(238, 238, 238, 150));
             button.setFont(new Font("AppleSDGothicNeoR00", Font.PLAIN, 14));
             button.addActionListener(event -> {
-                // 플레이리스트 상세 패널로 이동하는 이벤트
+                updateContentPanel(new PlayListPanel(playList));
             });
-            playListPanel.add(button);
+            panel.add(button);
         }
 
         return playListsPanel;
+    }
+
+    public void updateContentPanel(JPanel panel) {
+        this.removeAll();
+        this.add(panel);
+
+        this.setVisible(false);
+        this.setVisible(true);
     }
 }
