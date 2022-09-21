@@ -4,16 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class KpopOfTheDay {
     private JPanel contentPanel = new JPanel();
+
+    private JPanel mainPanel;
 
     public static void main(String[] args) throws IOException {
         KpopOfTheDay application = new KpopOfTheDay();
@@ -31,32 +29,10 @@ public class KpopOfTheDay {
         OverlayLayout overlay = new OverlayLayout(contentPanel);
         contentPanel.setLayout(overlay);
 
-        contentPanel.add(initMainPanel());
+        contentPanel.add(new MainPanel());
         contentPanel.add(setBackgroundImage());
 
         frame.setVisible(true);
-    }
-
-    private JPanel initMainPanel() throws FileNotFoundException {
-        JPanel mainPanel = new JPanel();
-        mainPanel.setOpaque(false);
-
-        mainPanel.add(initHeaderPanel());
-        mainPanel.add(new PlayListsPanel());
-
-        return mainPanel;
-    }
-
-    public JPanel initHeaderPanel() {
-        JPanel headerPanel = new JPanel();
-        headerPanel.setBackground(new Color(255, 255, 255, 150));
-
-        JLabel title = new JLabel("Kpop of the Day :)");
-        title.setFont(new Font("Montserrat", Font.BOLD, 24));
-        title.setBorder(new EmptyBorder(10, 20, 10, 20));
-        headerPanel.add(title);
-
-        return headerPanel;
     }
 
     public JLabel setBackgroundImage() throws IOException {
