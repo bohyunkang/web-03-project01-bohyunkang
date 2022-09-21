@@ -1,4 +1,5 @@
-# Compiled class file
+# Compiled class directory and file
+/classes/
 *.class
 
 # Log file
@@ -22,8 +23,14 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+# IDE
 /.idea/
+*.iml
+
+# Ignore Gradle project-specific cache directory
+.gradle/
+
+# Ignore Gradle build out directory
 /build/
+
 /bin/
-/classes/
-*.class
