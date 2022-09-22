@@ -18,8 +18,6 @@ public class PlayListsPanel extends JPanel {
     PlayListService playListService = new PlayListService();
 
     public PlayListsPanel() throws FileNotFoundException {
-        this.setOpaque(false);
-
         playLists = playListService.loadPlayList();
 
         this.setOpaque(false);
