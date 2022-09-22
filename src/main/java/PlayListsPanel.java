@@ -11,11 +11,17 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class PlayListsPanel extends JPanel {
+    private List<PlayList> playLists;
+
+    private JPanel playListsPanel;
+
     PlayListService playListService = new PlayListService();
 
-    List<PlayList> playLists = playListService.loadPlayList();
-
     public PlayListsPanel() throws FileNotFoundException {
+        this.setOpaque(false);
+
+        playLists = playListService.loadPlayList();
+
         this.setOpaque(false);
         this.add(initAddButton());
         this.add(initPlayListsPanel());
@@ -30,14 +36,13 @@ public class PlayListsPanel extends JPanel {
         button.setBackground(new Color(238, 238, 238, 150));
         button.setFont(new Font("AppleSDGothicNeoR00", Font.PLAIN, 12));
         button.addActionListener(event -> {
-            UploadFrame frame = new UploadFrame();
-            frame.setVisible(true);
+            updateContentPanel(new UploadPanel());
         });
         return button;
     }
 
     public JPanel initPlayListsPanel() {
-        JPanel playListsPanel = new JPanel();
+        playListsPanel = new JPanel();
         playListsPanel.setLayout(new GridLayout(0, 1));
         playListsPanel.setOpaque(false);
 

@@ -3,25 +3,27 @@ import models.PlayList;
 import models.Tag;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UploadFrame extends JFrame {
+public class UploadPanel extends JPanel {
+    private PlayListService playListService;
+    
     List<Music> musics = new ArrayList<>();
 
-    public UploadFrame() {
+    public UploadPanel() {
+        playListService = new PlayListService();
+
+        this.setOpaque(false);
+
         this.setLayout(new GridLayout(0, 1));
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("플레이리스트 등록하기");
-        this.setSize(300, 600);
-        this.setResizable(false);
 
         this.add(initUploadFormPanel());
         this.add(initListPanel());
@@ -31,8 +33,11 @@ public class UploadFrame extends JFrame {
 
     public JPanel initUploadFormPanel() {
         JPanel uploadFormPanel = new JPanel();
+        uploadFormPanel.setBackground(new Color(255, 255, 255, 200));
+
         JPanel panel = new JPanel();
         uploadFormPanel.add(panel);
+        panel.setOpaque(false);
         panel.setLayout(new GridLayout(0, 1));
 
         JLabel description = new JLabel("플레이리스트를 등록해주세요 :)");
@@ -40,6 +45,7 @@ public class UploadFrame extends JFrame {
         panel.add(description);
 
         JPanel themePanel = new JPanel();
+        themePanel.setOpaque(false);
         panel.add(themePanel);
 
         themePanel.add(new JLabel("테마 제목: "));
@@ -47,6 +53,7 @@ public class UploadFrame extends JFrame {
         themePanel.add(themeInput);
 
         JPanel tagPanel = new JPanel();
+        tagPanel.setOpaque(false);
         panel.add(tagPanel);
 
         tagPanel.add(new JLabel("태그: "));
@@ -54,6 +61,7 @@ public class UploadFrame extends JFrame {
         tagPanel.add(tagInput);
 
         JPanel curatorPanel = new JPanel();
+        curatorPanel.setOpaque(false);
         panel.add(curatorPanel);
 
         curatorPanel.add(new JLabel("제작자: "));
@@ -61,6 +69,7 @@ public class UploadFrame extends JFrame {
         curatorPanel.add(curatorInput);
 
         JPanel songTitlePanel = new JPanel();
+        songTitlePanel.setOpaque(false);
         panel.add(songTitlePanel);
 
         songTitlePanel.add(new JLabel("노래 제목: "));
@@ -68,6 +77,7 @@ public class UploadFrame extends JFrame {
         songTitlePanel.add(songTitleInput);
 
         JPanel artistPanel = new JPanel();
+        artistPanel.setOpaque(false);
         panel.add(artistPanel);
 
         artistPanel.add(new JLabel("가수 이름: "));
@@ -75,9 +85,16 @@ public class UploadFrame extends JFrame {
         artistPanel.add(artistInput);
 
         JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setOpaque(false);
         panel.add(buttonsPanel);
 
         JButton addButton = new JButton("추가");
+        addButton.setBorderPainted(false);
+        addButton.setContentAreaFilled(false);
+        addButton.setFocusPainted(false);
+        addButton.setOpaque(true);
+        addButton.setBackground(new Color(238, 238, 238, 150));
+
         addButton.addActionListener(event -> {
             String music = songTitleInput.getText();
             String artist = artistInput.getText();
@@ -96,11 +113,16 @@ public class UploadFrame extends JFrame {
             artistInput.setText("");
         });
         buttonsPanel.add(addButton);
+
         JButton uploadButton = new JButton("등록");
+        uploadButton.setBorderPainted(false);
+        uploadButton.setContentAreaFilled(false);
+        uploadButton.setFocusPainted(false);
+        uploadButton.setOpaque(true);
+        uploadButton.setBackground(new Color(238, 238, 238, 150));
+
         uploadButton.addActionListener(event -> {
             // TODO: 코드 정리 필요
-            PlayListService playListService = new PlayListService();
-
             int id = 0;
 
             try {
@@ -121,11 +143,10 @@ public class UploadFrame extends JFrame {
 
             try {
                 playListService.savePlayList(playList);
+                updateContentPanel(new PlayListsPanel());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            this.setVisible(false);
         });
         buttonsPanel.add(uploadButton);
 
@@ -133,6 +154,17 @@ public class UploadFrame extends JFrame {
     }
 
     public JPanel initListPanel() {
-        return new JPanel();
+        JPanel listPanel = new JPanel();
+        listPanel.setBackground(new Color(255, 255, 255, 200));
+
+        return listPanel;
+    }
+
+    public void updateContentPanel(JPanel panel) {
+        this.removeAll();
+        this.add(panel);
+
+        this.setVisible(false);
+        this.setVisible(true);
     }
 }
