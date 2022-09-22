@@ -15,7 +15,8 @@ import java.util.List;
 
 public class UploadPanel extends JPanel {
     private PlayListService playListService;
-    
+    private JPanel listPanel;
+
     List<Music> musics = new ArrayList<>();
 
     public UploadPanel() {
@@ -49,7 +50,7 @@ public class UploadPanel extends JPanel {
         panel.add(themePanel);
 
         themePanel.add(new JLabel("테마 제목: "));
-        JTextField themeInput = new JTextField(10);
+        JTextField themeInput = new JTextField(20);
         themePanel.add(themeInput);
 
         JPanel tagPanel = new JPanel();
@@ -57,7 +58,7 @@ public class UploadPanel extends JPanel {
         panel.add(tagPanel);
 
         tagPanel.add(new JLabel("태그: "));
-        JTextField tagInput = new JTextField(10);
+        JTextField tagInput = new JTextField(20);
         tagPanel.add(tagInput);
 
         JPanel curatorPanel = new JPanel();
@@ -65,7 +66,7 @@ public class UploadPanel extends JPanel {
         panel.add(curatorPanel);
 
         curatorPanel.add(new JLabel("제작자: "));
-        JTextField curatorInput = new JTextField(10);
+        JTextField curatorInput = new JTextField(20);
         curatorPanel.add(curatorInput);
 
         JPanel songTitlePanel = new JPanel();
@@ -73,7 +74,7 @@ public class UploadPanel extends JPanel {
         panel.add(songTitlePanel);
 
         songTitlePanel.add(new JLabel("노래 제목: "));
-        JTextField songTitleInput = new JTextField(10);
+        JTextField songTitleInput = new JTextField(20);
         songTitlePanel.add(songTitleInput);
 
         JPanel artistPanel = new JPanel();
@@ -81,7 +82,7 @@ public class UploadPanel extends JPanel {
         panel.add(artistPanel);
 
         artistPanel.add(new JLabel("가수 이름: "));
-        JTextField artistInput = new JTextField(10);
+        JTextField artistInput = new JTextField(20);
         artistPanel.add(artistInput);
 
         JPanel buttonsPanel = new JPanel();
@@ -111,6 +112,8 @@ public class UploadPanel extends JPanel {
 
             songTitleInput.setText("");
             artistInput.setText("");
+
+            updateListPanel();
         });
         buttonsPanel.add(addButton);
 
@@ -154,8 +157,37 @@ public class UploadPanel extends JPanel {
     }
 
     public JPanel initListPanel() {
-        JPanel listPanel = new JPanel();
+        listPanel = new JPanel();
         listPanel.setBackground(new Color(255, 255, 255, 200));
+
+        JPanel wrapperPanel = new JPanel();
+        wrapperPanel.setLayout(new GridLayout(0, 1));
+        wrapperPanel.setBackground(Color.BLUE);
+        wrapperPanel.setOpaque(false);
+        listPanel.add(wrapperPanel);
+
+        for (int i = 0; i < musics.size(); i += 1) {
+            JPanel panel = new JPanel();
+            panel.setOpaque(false);
+            wrapperPanel.add(panel);
+
+            Music music = musics.get(i);
+            String text = music.toString();
+
+            panel.add(new JLabel(text));
+
+            JButton deleteButton = new JButton("삭제");
+            panel.add(deleteButton);
+            deleteButton.setBorderPainted(false);
+            deleteButton.setContentAreaFilled(false);
+            deleteButton.setFocusPainted(false);
+            deleteButton.setOpaque(true);
+            deleteButton.setBackground(new Color(238, 238, 238, 150));
+            deleteButton.addActionListener(event -> {
+                musics.remove(music);
+                updateListPanel();
+            });
+        }
 
         return listPanel;
     }
@@ -166,5 +198,13 @@ public class UploadPanel extends JPanel {
 
         this.setVisible(false);
         this.setVisible(true);
+    }
+
+    public void updateListPanel() {
+        listPanel.removeAll();
+        listPanel.add(initListPanel());
+
+        listPanel.setVisible(false);
+        listPanel.setVisible(true);
     }
 }
