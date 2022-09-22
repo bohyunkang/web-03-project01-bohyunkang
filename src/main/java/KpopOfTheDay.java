@@ -11,8 +11,6 @@ import java.io.IOException;
 public class KpopOfTheDay {
     private JPanel contentPanel = new JPanel();
 
-    private JPanel mainPanel;
-
     public static void main(String[] args) throws IOException {
         KpopOfTheDay application = new KpopOfTheDay();
         application.run();

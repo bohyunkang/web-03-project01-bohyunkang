@@ -77,7 +77,6 @@ public class PlayListPanel extends JPanel {
     }
 
     public void updateContentPanel(JPanel panel) {
-//        playListPanel.removeAll();
         this.removeAll();
         this.add(panel);
 

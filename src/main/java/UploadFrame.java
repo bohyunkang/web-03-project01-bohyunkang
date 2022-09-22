@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,8 +17,11 @@ import java.util.List;
 
 public class UploadFrame extends JFrame {
     List<Music> musics = new ArrayList<>();
+    private PlayListsPanel playListsPanel;
 
-    public UploadFrame() {
+    public UploadFrame(PlayListsPanel playListsPanel) {
+        this.playListsPanel = playListsPanel;
+
         this.setLayout(new GridLayout(0, 1));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("플레이리스트 등록하기");
@@ -125,6 +130,17 @@ public class UploadFrame extends JFrame {
                 throw new RuntimeException(e);
             }
 
+            this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    try {
+                        updateContentPanel(new PlayListsPanel());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
+
             this.setVisible(false);
         });
         buttonsPanel.add(uploadButton);
@@ -134,5 +150,13 @@ public class UploadFrame extends JFrame {
 
     public JPanel initListPanel() {
         return new JPanel();
+    }
+
+    public void updateContentPanel(JPanel panel) {
+        this.removeAll();
+        this.add(panel);
+
+        this.setVisible(false);
+        this.setVisible(true);
     }
 }
