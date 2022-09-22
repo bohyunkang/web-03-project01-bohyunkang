@@ -15,8 +15,10 @@ public class PlayListsPanel extends JPanel {
 
     private JPanel playListsPanel;
 
+    PlayListService playListService = new PlayListService();
+
     public PlayListsPanel() throws FileNotFoundException {
-        PlayListService playListService = new PlayListService();
+        this.setOpaque(false);
 
         playLists = playListService.loadPlayList();
 
@@ -34,8 +36,7 @@ public class PlayListsPanel extends JPanel {
         button.setBackground(new Color(238, 238, 238, 150));
         button.setFont(new Font("AppleSDGothicNeoR00", Font.PLAIN, 12));
         button.addActionListener(event -> {
-            UploadFrame frame = new UploadFrame(this);
-            frame.setVisible(true);
+            updateContentPanel(new UploadPanel());
         });
         return button;
     }

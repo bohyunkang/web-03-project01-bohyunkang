@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class KpopOfTheDay {
-    private JPanel contentPanel = new JPanel();
-
     public static void main(String[] args) throws IOException {
         KpopOfTheDay application = new KpopOfTheDay();
         application.run();
@@ -19,9 +17,10 @@ public class KpopOfTheDay {
     public void run() throws IOException {
         JFrame frame = new JFrame("Kpop Of The Day");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(450, 700);
+        frame.setSize(560, 700);
         frame.setResizable(false);
 
+        JPanel contentPanel = new JPanel();
         frame.add(contentPanel);
 
         OverlayLayout overlay = new OverlayLayout(contentPanel);
@@ -42,4 +41,3 @@ public class KpopOfTheDay {
         return background;
     }
 }
-
