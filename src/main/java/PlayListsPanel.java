@@ -25,9 +25,19 @@ public class PlayListsPanel extends JPanel {
         historyPlayLists = historyService.loadHistory();
 
         this.setOpaque(false);
-        this.add(initAddButton());
-        this.add(initHistoryButton());
+        this.add(initButtonsPanel());
         this.add(initPlayListsPanel());
+    }
+
+    public JPanel initButtonsPanel() {
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        panel.setLayout(new GridLayout(0, 1));
+
+        panel.add(initAddButton());
+        panel.add(initHistoryButton());
+
+        return panel;
     }
 
     public JButton initAddButton() {

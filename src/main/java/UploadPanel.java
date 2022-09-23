@@ -153,6 +153,26 @@ public class UploadPanel extends JPanel {
         });
         buttonsPanel.add(uploadButton);
 
+        JPanel backButtonPanel = new JPanel();
+        backButtonPanel.setOpaque(false);
+        panel.add(backButtonPanel);
+
+        JButton backButton = new JButton("리스트로 돌아가기");
+        backButton.setBorderPainted(false);
+        backButton.setContentAreaFilled(false);
+        backButton.setFocusPainted(false);
+        backButton.setOpaque(true);
+        backButton.setBackground(new Color(0, 0, 0, 150));
+        backButton.setForeground(Color.WHITE);
+        backButton.addActionListener(event -> {
+            try {
+                updateContentPanel(new PlayListsPanel());
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        backButtonPanel.add(backButton);
+
         return uploadFormPanel;
     }
 
