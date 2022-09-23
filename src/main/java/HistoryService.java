@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class HistoryService {
-    private List<Integer> history = new ArrayList<>();
+    private List<Integer> histories = new ArrayList<>();
 
     public List<Integer> loadHistory() throws FileNotFoundException {
         File file = new File("histories.txt");
@@ -19,16 +19,18 @@ public class HistoryService {
         while (scanner.hasNextLine()) {
             String text = scanner.nextLine();
 
-            history.add(Integer.parseInt(text));
+            histories.add(Integer.parseInt(text));
         }
 
-        return history;
+        return histories;
     }
 
     public void saveHistory(int playListId) throws IOException {
         FileWriter fileWriter = new FileWriter("histories.txt", true);
 
-        fileWriter.write(playListId + "\n");
+        if (!histories.contains(playListId)) {
+            fileWriter.write(playListId + "\n");
+        }
 
         fileWriter.close();
     }
@@ -41,15 +43,10 @@ public class HistoryService {
         List<Integer> copy = loadHistory();
 
         for (int i = 0; i < copy.size(); i += 1) {
-            PlayList historyPlayList = playListService.findBy(history.get(i));
+            PlayList historyPlayList = playListService.findBy(histories.get(i));
             historyLists.add(historyPlayList);
         }
 
         return historyLists;
-    }
-
-    // TODO: 중복값인 경우 리스트에 추가 안 되게 하기
-    public boolean isRedundant(int playListId) throws FileNotFoundException {
-        return false;
     }
 }
