@@ -60,4 +60,15 @@ public class PlayListService {
 
         fileWriter.close();
     }
+
+    public PlayList findBy(Integer historyPlayListId) throws FileNotFoundException {
+        List<PlayList> playLists = loadPlayList();
+
+        PlayList historyPlayList = playLists.stream()
+                .filter(playList -> historyPlayListId == playList.getId())
+                .findAny()
+                .orElse(null);
+
+        return historyPlayList;
+    }
 }
