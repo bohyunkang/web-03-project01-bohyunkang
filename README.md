@@ -17,11 +17,13 @@
 - 2022.09.19 ~ 2022.09.23
 
 ## 🤓 프로젝트 상세 정보
-[🔗 프로젝트 설계]()
+[🔗 화면 스크린샷](https://github.com/1mptera/web-03-project01-bohyunkang/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%99%94%EB%A9%B4) 
 
-[🔗 프로젝트 클래스 다이어그램]()
+[🔗 설계](https://github.com/1mptera/web-03-project01-bohyunkang/issues/1)
 
-[🔗 프로젝트 작업일지]()
+[🔗 클래스 다이어그램](https://github.com/1mptera/web-03-project01-bohyunkang/issues/2)
+
+[🔗 작업 일지](https://github.com/1mptera/web-03-project01-bohyunkang/issues?q=is%3Aopen+is%3Aissue+label%3A%22daily+work+record%22)
 
 ## 👩🏻‍💻 프로그램 실행하는 법
 ```
