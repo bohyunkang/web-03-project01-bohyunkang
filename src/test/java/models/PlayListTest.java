@@ -41,6 +41,6 @@ class PlayListTest {
 
         PlayList playList = new PlayList(id, theme, curator, musics, tag);
 
-        assertEquals("1,꼭 들어야 하는 9월의 신곡,보니,[After Like-IVE],중독성", playList.toString());
+        assertEquals("1,꼭 들어야 하는 9월의 신곡,보니,After Like-IVE,중독성", playList.toString());
     }
 }

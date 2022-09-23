@@ -18,6 +18,6 @@ class MusicTest {
     void music() {
         Music music = new Music("질주 (2 Baddies)", "NCT 127");
 
-        assertEquals("질주 (2 Baddies) - NCT 127", music.toString());
+        assertEquals("질주 (2 Baddies)-NCT 127", music.toString());
     }
 }
