@@ -11,41 +11,21 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-public class PlayListsPanel extends JPanel {
-    private List<PlayList> playLists;
-    private List<Integer> historyPlayLists;
+public class HistoryPanel extends JPanel {
+    private List<PlayList> historyPlayLists;
 
-    private JPanel playListsPanel;
-
-    PlayListService playListService = new PlayListService();
     HistoryService historyService = new HistoryService();
 
-    public PlayListsPanel() throws FileNotFoundException {
-        playLists = playListService.loadPlayList();
-        historyPlayLists = historyService.loadHistory();
+    public HistoryPanel() throws FileNotFoundException {
+        historyPlayLists = historyService.loadHistoryList();
 
         this.setOpaque(false);
-        this.add(initAddButton());
-        this.add(initHistoryButton());
-        this.add(initPlayListsPanel());
+        this.add(initBackButton());
+        this.add(initHistoryListPanel());
     }
 
-    public JButton initAddButton() {
-        JButton button = new JButton("플레이리스트 등록");
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.setOpaque(true);
-        button.setBackground(new Color(238, 238, 238, 150));
-        button.setFont(new Font("AppleSDGothicNeoR00", Font.PLAIN, 12));
-        button.addActionListener(event -> {
-            updateContentPanel(new UploadPanel());
-        });
-        return button;
-    }
-
-    public JButton initHistoryButton() {
-        JButton button = new JButton("방금 본 플레이리스트");
+    public JButton initBackButton() {
+        JButton button = new JButton("리스트로 돌아가기");
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
@@ -54,7 +34,7 @@ public class PlayListsPanel extends JPanel {
         button.setFont(new Font("AppleSDGothicNeoR00", Font.PLAIN, 12));
         button.addActionListener(event -> {
             try {
-                updateContentPanel(new HistoryPanel());
+                updateContentPanel(new PlayListsPanel());
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -62,16 +42,16 @@ public class PlayListsPanel extends JPanel {
         return button;
     }
 
-    public JPanel initPlayListsPanel() {
-        playListsPanel = new JPanel();
-        playListsPanel.setLayout(new GridLayout(0, 1));
-        playListsPanel.setOpaque(false);
+    public JPanel initHistoryListPanel() {
+        JPanel historyListPanel = new JPanel();
+        historyListPanel.setLayout(new GridLayout(0, 1));
+        historyListPanel.setOpaque(false);
 
-        for (PlayList playList : playLists) {
+        for (PlayList playList : historyPlayLists) {
             JPanel panel = new JPanel();
             panel.setOpaque(true);
             panel.setBackground(new Color(255, 255, 255, 150));
-            playListsPanel.add(panel);
+            historyListPanel.add(panel);
 
             JLabel image = new JLabel("");
             image.setIcon(new ImageIcon("src/main/resources/playListIcon.png"));
@@ -100,7 +80,7 @@ public class PlayListsPanel extends JPanel {
             panel.add(button);
         }
 
-        return playListsPanel;
+        return historyListPanel;
     }
 
     public void updateContentPanel(JPanel panel) {

@@ -13,8 +13,8 @@ class PlayListServiceTest {
     void loadPlayList() throws FileNotFoundException {
         PlayListService playListService = new PlayListService();
 
-        assertEquals("1,꼭 들어야 하는 9월의 신곡 케이팝,보니,[질주(2 Baddies)-NCT 127, After " +
-                        "Like-아이브, Attention-뉴진스, Pink Venom-블랙핑크, Talk Talk Talk-트와이스],신곡",
+        assertEquals("1,꼭 들어야 하는 9월의 신곡 케이팝,보니,질주(2 Baddies)-NCT 127/After " +
+                        "Like-아이브/Attention-뉴진스/Pink Venom-블랙핑크/Talk Talk Talk-트와이스,신곡",
                 playListService.loadPlayList().get(0).toString());
     }
 
@@ -48,10 +48,16 @@ class PlayListServiceTest {
 //
 //        PlayList playList = new PlayList(id, theme, curator, musics, tag);
 //
-//
 //        playListService.savePlayList(playList);
 //
 //        assertEquals("4,꼭 들어야 하는 8월의 신곡 케이팝,보니,Hype Boy-뉴진스,신곡",
 //                playListService.loadPlayList().get(lastPlaylist).toString());
+    }
+
+    @Test
+    void findBy() throws FileNotFoundException {
+        PlayListService playListService = new PlayListService();
+
+        assertEquals("1,꼭 들어야 하는 9월의 신곡 케이팝,보니,질주(2 Baddies)-NCT 127/After Like-아이브/Attention-뉴진스/Pink Venom-블랙핑크/Talk Talk Talk-트와이스,신곡", playListService.findBy(1).toString());
     }
 }
